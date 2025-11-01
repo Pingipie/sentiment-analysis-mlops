@@ -1,0 +1,6 @@
+# requirements.txt
+
+transformers
+torch
+scipy
+pytest

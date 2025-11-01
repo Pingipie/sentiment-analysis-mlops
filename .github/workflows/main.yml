@@ -1,0 +1,48 @@
+# .github/workflows/main.yml
+
+name: CI/CD for Sentiment Analysis Model
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  test-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run tests with pytest
+      run: |
+        pip install pytest
+        pytest tests/
+
+    - name: Push to Hugging Face Hub
+      # Questo step si esegue solo se i test hanno successo
+      if: success()
+      env:
+        HF_TOKEN: ${{ secrets.HF_TOKEN }} # Token di Hugging Face salvato nei secrets di GitHub
+      run: |
+        # Script per il login e il push del modello su Hugging Face
+        # Necessita della libreria 'huggingface_hub'
+        # Esempio di script Python da eseguire:
+        # from huggingface_hub import HfApi, HfFolder
+        # from transformers import AutoModelForSequenceClassification, AutoTokenizer
+        #
+        # model = AutoModelForSequenceClassification.from_pretrained("./path/to/your/model")
+        # tokenizer = AutoTokenizer.from_pretrained("./path/to/your/tokenizer")
+        #
+        # model.push_to_hub("YourUsername/YourModelName", use_auth_token=HfFolder.get_token())
+        # tokenizer.push_to_hub("YourUsername/YourModelName", use_auth_token=HfFolder.get_token())
+        echo "Modello deployato su Hugging Face Hub (simulazione)"
