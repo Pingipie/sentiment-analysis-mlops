@@ -26,7 +26,7 @@ def test_analyze_sentiment_negative():
 
 def test_analyze_sentiment_neutral():
     """Verifica che un testo neutro venga classificato correttamente."""
-    text = "This is a pen."
+    text = "The company will be presenting at the conference next Tuesday."
     sentiment, scores = analyze_sentiment(text)
     
     assert sentiment == "neutral"
