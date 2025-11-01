@@ -1,0 +1,9 @@
+# prometheus/prometheus.yml
+
+global:
+  scrape_interval: 15s # Frequenza di scrape
+
+scrape_configs:
+  - job_name: 'sentiment-app'
+    static_configs:
+      - targets: ['sentiment-app:8000'] # Nome del servizio e porta definiti in docker-compose

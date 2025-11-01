@@ -1,6 +1,8 @@
 # requirements.txt
-
 transformers
 torch
 scipy
 pytest
+Flask
+prometheus-flask-exporter
+requests
